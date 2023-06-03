@@ -1,0 +1,22 @@
+library(gtsummary)
+
+
+#########################
+# statistic: to compue mean ± sd for some continuous variables with normal distribution
+#digits : number of digits for countinuous variables
+#missing=no : to exclude missing frequency from table
+#########################
+names(data)
+
+tabl_1 <- data%>%
+  tbl_summary(
+    by = group,
+    missing="no",
+    statistic = list(c(age, bmi) ~ "{mean} ± {sd}"),
+    digits = all_continuous() ~ 2,
+    label = age ~ "Age (year)")%>%
+  add_p(pvalue_fun = ~ style_pvalue(.x, digits = 3)) %>%
+  add_overall() %>% 
+  bold_labels()
+
+tabl_1
