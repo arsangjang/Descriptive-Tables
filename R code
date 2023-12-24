@@ -9,6 +9,7 @@ library(gtsummary)
 names(data)
 
 tabl_1 <- data%>%
+select(var1, var2)%>%
   tbl_summary(
     by = group,
     missing="no",
